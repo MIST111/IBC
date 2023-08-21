@@ -1,0 +1,92 @@
+struct Employee {
+    name: String,
+    id: i32,
+    email: String,
+    age: i32,
+    phone_number: String,
+}
+
+fn main() {
+    // Create an array of employees
+    let mut employees = vec![
+        Employee {
+            name: "John Doe".to_string(),
+            id: 1,
+            email: "john.doe@example.com".to_string(),
+            age: 30,
+            phone_number: "123-456-7890".to_string(),
+        },
+        Employee {
+            name: "Jane Doe".to_string(),
+            id: 2,
+            email: "jane.doe@example.com".to_string(),
+            age: 25,
+            phone_number: "987-654-3210".to_string(),
+        },
+    ];
+
+    // Get the employee id from the user
+    println!("Enter the employee id: ");
+    let employee_id = read_i32();
+
+    // Find the employee with the given id
+    let employee = find_employee_by_id(employees, employee_id);
+
+    // If the employee is found, print their details
+    if let Some(employee) = employee {
+        println!("Employee details:");
+        println!("Name: {}", employee.name);
+        println!("Id: {}", employee.id);
+        println!("Email: {}", employee.email);
+        println!("Age: {}", employee.age);
+        println!("Phone number: {}", employee.phone_number);
+    } else {
+        println!("Employee not found");
+    }
+
+    // Get the age from the user
+    println!("Enter the age: ");
+    let age = read_i32();
+
+    // Find all employees with the given age
+    let employees_with_same_age = find_employees_with_same_age(employees, age);
+
+    // Print the details of all employees with the given age
+    for employee in employees_with_same_age {
+        println!("Employee details:");
+        println!("Name: {}", employee.name);
+        println!("Id: {}", employee.id);
+        println!("Email: {}", employee.email);
+        println!("Age: {}", employee.age);
+        println!("Phone number: {}", employee.phone_number);
+    }
+}
+
+fn find_employee_by_id(employees: Vec<Employee>, employee_id: i32) -> Option<Employee> {
+    for employee in employees {
+        if employee.id == employee_id {
+            return Some(employee);
+        }
+    }
+
+    return None;
+}
+
+fn find_employees_with_same_age(employees: Vec<Employee>, age: i32) -> Vec<Employee> {
+    let mut employees_with_same_age = vec![];
+
+    for employee in employees {
+        if employee.age == age {
+            employees_with_same_age.push(employee);
+        }
+    }
+
+    return employees_with_same_age;
+}
+
+fn read_i32() -> i32 {
+    let mut input = String::new();
+    std::io::stdin().read_line(&mut input).unwrap();
+
+    return input.trim().parse().unwrap();
+}
