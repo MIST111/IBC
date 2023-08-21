@@ -1,0 +1,54 @@
+struct Student {
+    name: String,
+    email: String,
+    phno: String,
+    id: i32,
+}
+
+fn main() {
+    let mut students: Vec<Student> = Vec::new();
+
+    students.push(Student {
+        name: String::from("John Doe"),
+        email: String::from("john.doe@example.com"),
+        phno: String::from("123-456-7890"),
+        id: 1,
+    });
+
+    students.push(Student {
+        name: String::from("Jane Doe"),
+        email: String::from("jane.doe@example.com"),
+        phno: String::from("987-654-3210"),
+        id: 2,
+    });
+
+    students.push(Student {
+        name: String::from("Peter Smith"),
+        email: String::from("peter.smith@example.com"),
+        phno: String::from("098-765-4321"),
+        id: 3,
+    });
+
+    students.push(Student {
+        name: String::from("Mary Jones"),
+        email: String::from("mary.jones@example.com"),
+        phno: String::from("543-210-9876"),
+        id: 4,
+    });
+
+    students.push(Student {
+        name: String::from("David Brown"),
+        email: String::from("david.brown@example.com"),
+        phno: String::from("876-543-2109"),
+        id: 5,
+    });
+
+    let index = 10; // Out of bounds index
+
+    let student = match students.get(index) {
+        Some(student) => student,
+        None => panic!("Index {} is out of bounds", index),
+    };
+
+    println!("Student name: {}", student.name);
+}
